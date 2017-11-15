@@ -1,0 +1,12 @@
+#root {
+  background-color: #2b2c2e;
+}
+
+.header {
+  text-align: center;
+}
+
+.header .logo {
+  height: 50px;
+  width: 100px;
+}
