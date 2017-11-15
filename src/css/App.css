@@ -4,6 +4,8 @@
 
 .header {
   text-align: center;
+  height: 50px;
+  padding: 0 50px;
 }
 
 .header .logo {
@@ -13,4 +15,17 @@
 
 .products {
   color: white;
+}
+
+.products .new-product {
+  text-align: center;
+}
+
+.products .container-title {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.new-product-form button {
+  cursor: pointer;
 }
