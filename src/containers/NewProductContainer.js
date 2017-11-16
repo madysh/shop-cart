@@ -1,12 +1,13 @@
 import React from 'react';
-import newProductModel from '../models/newProductModel'
+import productModel from '../models/productModel'
 
 class NewProductContainer extends React.Component{
   constructor(){
     super();
     this.state = {
-      productModel: new newProductModel(),
-      submitButtonIsActive: false
+      productModel: new productModel(),
+      submitButtonIsActive: false,
+      showImagesList: false
     };
   }
 
@@ -16,16 +17,17 @@ class NewProductContainer extends React.Component{
 
   onChange(e){
     var target = e.target;
-    this.state.productModel.setValue(target.name, target.value)
-    this.setState({submitButtonIsActive: this.state.productModel.isValid()})
+    this.state.productModel.setValue(target.name, target.value);
+    this.setState({submitButtonIsActive: this.state.productModel.isValid()});
   }
 
   onClickCountButton(e){
     e.preventDefault();
     var target = e.target;
     var value = this.state.productModel.count;
+    var wasPressedMinusButton = target.classList.contains("new-product-countButton-minus");
 
-    if (target.classList.contains("new-product-countButton-minus")) {
+    if (wasPressedMinusButton) {
       if (value < 2){
         return;
       }
@@ -38,7 +40,21 @@ class NewProductContainer extends React.Component{
     document.getElementById("new-product-count").innerHTML = value;
   }
 
+  onClickNewProductImage(e){
+    this.setState({showImagesList:!this.state.showImagesList});
+  }
+
+  onClickImagesListItem(e){
+    var imageName = e.target.getAttribute('data-name');
+    console.log(e.target);
+    this.state.productModel.setValue('imageName', imageName);
+    this.setState({showImagesList:!this.state.showImagesList});
+  }
+
   render(){
+    const availableImageNames = this.state.productModel.availableImageNames();
+    var productModel = this.state.productModel;
+
     return (
       <div className="new-product col-6">
         <div className='container-title'>Add product to your cart list</div>
@@ -74,12 +90,36 @@ class NewProductContainer extends React.Component{
             <button
               className="btn new-product-countButton new-product-countButton-plus"
               onClick={this.onClickCountButton.bind(this)}
-              >
-                +
-              </button>
+            >
+              +
+            </button>
           </div>
           <div className="new-product-image-container">
-            <img src={this.state.productModel.imageSrc()} className="new-product-image" />
+            <img
+              src={productModel.imageSrc()}
+              className="new-product-image"
+              onClick={this.onClickNewProductImage.bind(this)}
+              alt="New Product"
+              draggable="false"
+            />
+            <div id="new-product-images-list" className={this.state.showImagesList ? '' : "hidden"}>
+              {availableImageNames.map(name =>
+                <div
+                  className="new-product-image-item-container"
+                  key={name}
+                  onClick={this.onClickImagesListItem.bind(this)}
+                  data-name={name}
+                >
+                  <img
+                    alt={name}
+                    data-name={name}
+                    className="new-product-image-item"
+                    src={productModel.imageSrc(name)}
+                    draggable="false"
+                  />
+                </div>
+              )}
+            </div>
           </div>
 
           <button
