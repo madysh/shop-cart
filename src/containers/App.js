@@ -4,7 +4,6 @@ import ProductsListContainer from './ProductsListContainer'
 
 import logo from '../images/logo.jpg';
 import '../css/App.css';
-import '../css/bootstrap.min.css';
 
 const App = () => (
   <div>
