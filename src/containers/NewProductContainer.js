@@ -1,36 +1,44 @@
 import React from 'react';
-import productModel from '../models/productModel'
+import Product from '../models/Product'
 import '../css/NewProductContainer.css';
-
-const initialState = {
-  productModel: new productModel(),
-  submitButtonIsActive: false,
-  showImagesList: false
-};
 
 class NewProductContainer extends React.Component{
   constructor(props){
     super(props);
-    this.state = initialState;
+    this.state = {
+      product: new Product(),
+      submitButtonIsActive: false,
+      showImagesList: false
+    };
   }
 
-  componentDidMount(){
-    document.getElementById("new-product-count").innerHTML  = this.state.productModel.count;
+  onChange(inputName){
+    var value = '';
+    switch(inputName) {
+    case 'name':
+      value = this.productNameInput.value;
+      break;
+    case 'price':
+      value = this.productPriceInput.value;
+      break;
+    default:
+      return;
+    };
+
+    this.setState((prevState, props) => {
+      var product = prevState.product;
+      product[inputName] = value;
+      return {
+        product: product,
+        submitButtonIsActive: product.isValid()
+      };
+    });
   }
 
-  onChange(e){
-    var target = e.target;
-    this.state.productModel.setValue(target.name, target.value);
-    this.setState({submitButtonIsActive: this.state.productModel.isValid()});
-  }
-
-  onClickCountButton(e){
+  onClickCountButton = (action, e) => {
     e.preventDefault();
-    var target = e.target;
-    var value = this.state.productModel.count;
-    var wasPressedMinusButton = target.classList.contains("new-product-countBtn-minus");
-
-    if (wasPressedMinusButton) {
+    var value = this.state.product.count;
+    if (action === 'minus') {
       if (value < 2){
         return;
       }
@@ -39,96 +47,106 @@ class NewProductContainer extends React.Component{
       value++;
     }
 
-    this.state.productModel.setValue('count', value);
-    document.getElementById("new-product-count").innerHTML = value;
+    this.setState((prevState, props) => {
+      var product = prevState.product
+      product.count = value
+      return {product: product};
+    });
   }
 
   resetForm(){
-    // TODO: it doesn't work
-    this.setState(initialState);
-    document.getElementById('new-product-form').reset();
-    document.getElementById('new-product-count').innerHTML = 1;
-    document.getElementById('new-product-image').src = initialState.productModel.imageSrc();
+    this.setState({
+      product: new Product(),
+      submitButtonIsActive: false,
+      showImagesList: false
+    });
   }
 
-  onClickSubmitButton(e){
+  onClickSubmitButton = (e) => {
     e.preventDefault();
-    this.props.addNewProduct(this.state.productModel);
+    this.props.addNewProduct(this.state.product);
     this.resetForm();
   }
 
-  onClickNewProductImage(e){
+  onClickNewProductImage = () => {
     this.setState({showImagesList:!this.state.showImagesList});
   }
 
-  onClickImagesListItem(e){
-    var imageName = e.target.getAttribute('data-name');
-    this.state.productModel.setValue('imageName', imageName);
-    this.setState({showImagesList:!this.state.showImagesList});
+  onClickImagesListItem = (imageName) => {
+    this.setState((prevState, props) => {
+      var product = prevState.product
+      product['imageName'] = imageName
+      return {
+        product: product,
+        showImagesList: !prevState.showImagesList
+      };
+    });
   }
 
   render(){
-    const availableImageNames = this.state.productModel.availableImageNames();
-    var productModel = this.state.productModel;
+    const availableImageNames = this.state.product.availableImageNames();
+    var product = this.state.product;
 
     return (
-      <div id="new-product-container" className="col-6">
+      <div className="new-product-container col-6">
         <div className='container-title'>Add product to your cart list</div>
-        <form id="new-product-form">
+        <form className="new-product-form">
           <input
             type="text"
-            id="new-product-name"
             name="name"
-            onChange={this.onChange.bind(this)}
-            className="form-control"
+            onChange={() => {this.onChange('name');}}
+            className="new-product-name form-control"
             placeholder="Product name"
+            value={product.name}
+            ref={(input) => { this.productNameInput = input; }}
           />
           <input
             type="number"
             min="1"
-            id="new-product-price"
             name='price'
-            onChange={this.onChange.bind(this)}
-            className="form-control"
+            onChange={() => {this.onChange('price');}}
+            className="new-product-price form-control"
             placeholder="Product price"
+            value={product.price}
+            ref={(input) => { this.productPriceInput = input; }}
           />
 
           <div className="new-product-count-container">
             <button
               className="btn new-product-countBtn new-product-countBtn-minus"
-              onClick={this.onClickCountButton.bind(this)}
+              onClick={(e) => {this.onClickCountButton('minus', e);}}
             >
               -
             </button>
-            <div id="new-product-count" />
+            <div className="new-product-count">{product.count}</div>
             <button
               className="btn new-product-countBtn new-product-countBtn-plus"
-              onClick={this.onClickCountButton.bind(this)}
+              onClick={(e) => {this.onClickCountButton('plus', e);}}
             >
               +
             </button>
           </div>
           <div className="new-product-image-container">
             <img
-              src={productModel.imageSrc()}
-              id="new-product-image"
-              onClick={this.onClickNewProductImage.bind(this)}
+              src={product.imageSrc()}
+              className="new-product-image"
+              onClick={this.onClickNewProductImage}
               alt="New Product"
               draggable="false"
             />
-            <div id="new-product-images-list" className={this.state.showImagesList ? '' : "hidden"}>
+            <div
+              className={"new-product-images-list " + (this.state.showImagesList ? '' : "hidden")}>
               {availableImageNames.map(name =>
                 <div
                   className="new-product-image-item-container"
                   key={name}
-                  onClick={this.onClickImagesListItem.bind(this)}
-                  data-name={name}
+                  onClick={() => {this.onClickImagesListItem(name);}}
                 >
                   <img
                     alt={name}
                     data-name={name}
                     className="new-product-image-item"
-                    src={productModel.imageSrc(name)}
+                    src={product.imageSrc(name)}
                     draggable="false"
                   />
                 </div>
@@ -138,10 +156,9 @@ class NewProductContainer extends React.Component{
 
           <button
             type="submit"
-            id="new-product-submit-button"
-            className={"btn " + (this.state.submitButtonIsActive ? '' : 'disabled')}
+            className={"new-product-submit-button btn " + (this.state.submitButtonIsActive ? '' : 'disabled')}
             disabled={!this.state.submitButtonIsActive}
-            onClick={this.onClickSubmitButton.bind(this)}
+            onClick={(e) => {this.onClickSubmitButton(e);}}
           >
             Add to list
           </button>

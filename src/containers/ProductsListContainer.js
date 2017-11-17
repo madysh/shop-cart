@@ -9,14 +9,11 @@ class ProductsListContainer extends React.Component{
     }
   }
 
-  onClickCountButton(product, productIndex, e){
+  onClickCountButton = (action, product, productIndex, e) => {
     e.preventDefault();
-    var target = e.target;
     var value = product.count;
-    var wasPressedMinusButton = target.classList.contains("product-countBtn-minus");
 
-    // TODO: DRY
-    if (wasPressedMinusButton) {
+    if (action === 'minus') {
       if (value < 2){
         return;
       }
@@ -25,26 +22,27 @@ class ProductsListContainer extends React.Component{
       value++;
     }
 
-    product.setValue('count', value);
-    this.props.updateProduct(product, productIndex);
+    this.setState((prevState, props) => {
+      var products = prevState.products
+      products[productIndex].count = value
+      return {products: products};
+    });
   }
 
-  onClickDeleteProduct(productIndex, e){
-    console.log()
+  onClickDeleteProduct = (productIndex) => {
     this.props.deleteProduct(productIndex);
   }
 
   totalAmount(){
     var totalAmount = this.state.products.reduce((s, p) => s + p.amount(), 0)
-
     return totalAmount;
   }
 
   render(){
     return (
-      <div id="products-list" className="col-6">
+      <div className="products-list col-6">
         <div className='container-title'>Product list</div>
-        <div id="products-container">
+        <div className="products-container">
           {this.state.products.map((product,index) =>
             <div className="products-item" key={index}>
               <div className="products-item-image">
@@ -54,24 +52,22 @@ class ProductsListContainer extends React.Component{
                   alt={product.name}
                 />
               </div>
-
               <div className="products-item-details">
                 <div className="products-item-name">{product.name}</div>
                 <div className="products-item-count-container">
                   <button
-                    className="btn product-countBtn product-countBtn-minus"
-                    onClick={this.onClickCountButton.bind(this, product, index)}
+                    className="btn product-count-btn product-count-btn-minus"
+                    onClick={(e) => {this.onClickCountButton('minus', product, index, e);}}
                   >
                     -
                   </button>
                   <div className="product-count">{product.count}</div>
                   <button
-                    className="btn product-countBtn product-countBtn-plus"
-                    onClick={this.onClickCountButton.bind(this, product, index)}
+                    className="btn product-count-btn product-count-btn-plus"
+                    onClick={(e) => {this.onClickCountButton('plus', product, index, e);}}
                   >
                     +
                   </button>
-
                 </div>
                 <div className="products-item-amount-container">
                   Total
@@ -81,18 +77,17 @@ class ProductsListContainer extends React.Component{
                   $
                 </div>
               </div>
-
-              <div className="product-item-controllButtons">
-                <div className="product-item-controllBtn-container">
+              <div className="product-item-controll-buttons">
+                <div className="product-item-controll-btn-container">
                   <img
                     className="product-item-delete"
                     src={require("../images/icon-delete.png")}
                     draggable="false"
                     alt="Delete product"
-                    onClick={this.onClickDeleteProduct.bind(this, index)}
+                    onClick={() => {this.onClickDeleteProduct(index);}}
                   />
                 </div>
-                <div className="product-item-controllBtn-container">
+                <div className="product-item-controll-btn-container">
                   <img
                     className="product-item-details"
                     src={require("../images/icon-details.png")}
@@ -104,10 +99,9 @@ class ProductsListContainer extends React.Component{
             </div>
           )}
         </div>
-
-        <div id='total-amount-container'>
+        <div className='total-amount-container'>
           Total
-          <span id='total-amount'>{this.totalAmount()}</span>
+          <span className='total-amount'>{this.totalAmount()}</span>
           $
         </div>
       </div>

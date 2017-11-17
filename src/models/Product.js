@@ -1,13 +1,9 @@
-class productModel{
-  constructor(args={}){
+class Product{
+  constructor(args ={}){
     this.name = args['name'] || ''
-    this.price = args['price'] || 0;
+    this.price = args['price'] || '';
     this.count = args['count'] || 1;
     this.imageName = args['imageName'] || 'default';
-  }
-
-  setValue(attr, value){
-    this[attr]=value;
   }
 
   isValid(){
@@ -27,4 +23,4 @@ class productModel{
   }
 }
 
-export default productModel
+export default Product

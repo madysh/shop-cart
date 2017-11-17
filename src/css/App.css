@@ -17,7 +17,7 @@
   color: white;
 }
 
-#new-product-container, #products-list {
+.new-product-container, .products-list {
   text-align: center;
 }
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import NewProductContainer from './NewProductContainer'
 import ProductsListContainer from './ProductsListContainer'
-import productModel from '../models/productModel'
-
+import logo from '../images/logo.jpg'
+import Product from '../models/Product'
 import '../css/App.css';
 
 class App extends React.Component{
@@ -10,35 +10,41 @@ class App extends React.Component{
     super();
     this.state = {
       products: [
-        new productModel({name: 'Buy apples', imageName: 'apple', price: '1'}),
-        new productModel({name: 'fish sticks', imageName: 'fish', price: '7'})
+        new Product({name: 'Buy apples', imageName: 'apple', price: '1'}),
+        new Product({name: 'fish sticks', imageName: 'fish', price: '7'})
       ]
     };
   }
 
   addNewProduct(product){
-    var products = this.state.products;
-    products.push(product);
-    this.setState({products: products});
+    this.setState((prevState, props) => {
+      var products = prevState.products;
+      products.push(product);
+      return {products: products};
+    });
   }
 
   updateProduct(product, index){
-    var products = this.state.products;
-    products[index] = product;
-    this.setState({products: products});
+    this.setState((prevState, props) => {
+      var products = prevState.products;
+      products[index] = product;
+      return {products: products};
+    });
   }
 
   deleteProduct(index){
-    var products = this.state.products;
-    products.splice(index, 1);
-    this.setState({products: products});
+    this.setState((prevState, props) => {
+      var products = prevState.products;
+      products.splice(index, 1);
+      return {products: products};
+    });
   }
 
   render(){
     return(
       <div>
         <div className="header">
-          <img src={require('../images/logo.jpg')} className="logo" alt="logo" />
+          <img src={logo} className="logo" alt="React" />
         </div>
         <div className="products row">
           <NewProductContainer

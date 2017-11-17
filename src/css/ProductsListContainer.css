@@ -1,10 +1,10 @@
-#total-amount-container {
+.total-amount-container {
   text-align: left;
   padding-top: 10px;
   font-size: medium;
 }
 
-#total-amount {
+.total-amount-container .total-amount {
   margin: 0 5px 0 10px;
 }
 
@@ -14,12 +14,12 @@
   margin: 5px;
 }
 
-.products-item .products-item-image {
+.products-item-image {
   float: left;
   padding: 30px;
 }
 
-.products-item .products-item-image img {
+.products-item-image img {
   width: 40px;
   height: 40px;
 }
@@ -28,9 +28,10 @@
   width: calc(100% - 160px);
   height: 100px;
   display: inline-block;
+  padding-top: 10px;
 }
 
-.products-item-details .products-item-name {
+.products-item-name {
   font-weight: bold;
   height: 25px;
   overflow:hidden;
@@ -42,7 +43,7 @@
   padding: 7px 0;
 }
 
-.products-item-count-container .product-countBtn, .products-item-count-container .product-count {
+.products-item-count-container .product-count-btn, .products-item-count-container .product-count {
   display: inline-block;
   width: 26px;
   height: 26px;
@@ -50,7 +51,7 @@
   vertical-align: middle;
 }
 
-.products-item-count-container .product-countBtn {
+.products-item-count-container .product-count-btn {
   line-height: 10px;
   padding: 0;
   cursor: pointer;
@@ -66,22 +67,22 @@
   font-size: small;
 }
 
-.products-item-amount-container .products-item-amount {
+.products-item-amount {
   display: inline-block;
   padding: 0 5px 0 10px;
 }
 
-.product-item-controllButtons {
+.product-item-controll-buttons {
   width: 60px;
   display: inline-block;
   float: right;
 }
 
-.product-item-controllButtons .product-item-controllBtn-container {
+.product-item-controll-btn-container {
   display: inline-block;
   padding: 5px;
 }
 
-.product-item-controllButtons .product-item-controllBtn-container img{
+.product-item-controll-btn-container img{
   cursor: pointer;
 }
