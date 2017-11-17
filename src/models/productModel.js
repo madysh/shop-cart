@@ -1,9 +1,9 @@
 class productModel{
-  constructor(){
-    this.name = ''
-    this.price = 0;
-    this.count = 1;
-    this.imageName = 'default';
+  constructor(args={}){
+    this.name = args['name'] || ''
+    this.price = args['price'] || 0;
+    this.count = args['count'] || 1;
+    this.imageName = args['imageName'] || 'default';
   }
 
   setValue(attr, value){
@@ -20,6 +20,10 @@ class productModel{
 
   imageSrc(name){
     return require('../images/product-image-'+(name || this.imageName)+'.png');
+  }
+
+  amount(){
+    return this.count * this.price;
   }
 }
 
