@@ -88,7 +88,7 @@ class NewProductContainer extends React.Component{
     var product = this.state.product;
 
     return (
-      <div className="new-product-container col-6">
+      <div className="new-product-container component-container col-6">
         <div className='container-title'>Add product to your cart list</div>
         <div className="new-product-form">
           <input
@@ -113,14 +113,14 @@ class NewProductContainer extends React.Component{
 
           <div className="new-product-count-container">
             <button
-              className="btn new-product-countBtn new-product-countBtn-minus"
+              className="btn new-product-count-btn new-product-count-btn-minus"
               onClick={(e) => {this.onClickCountButton('minus', e);}}
             >
               -
             </button>
             <div className="new-product-count">{product.count}</div>
             <button
-              className="btn new-product-countBtn new-product-countBtn-plus"
+              className="btn new-product-count-btn new-product-count-btn-plus"
               onClick={(e) => {this.onClickCountButton('plus', e);}}
             >
               +
@@ -153,9 +153,7 @@ class NewProductContainer extends React.Component{
               )}
             </div>
           </div>
-
           <button
-            type="submit"
             className={"new-product-submit-button btn " + (this.state.submitButtonIsActive ? '' : 'disabled')}
             disabled={!this.state.submitButtonIsActive}
             onClick={(e) => {this.onClickSubmitButton(e);}}

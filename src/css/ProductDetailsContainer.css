@@ -1,0 +1,23 @@
+.product-image-container {
+  padding: 10px 0;
+}
+
+.product-attribute {
+  padding: 2px 0;
+  font-size: 0.9em;
+}
+
+.product-attribute-value {
+  padding: 0 5px;
+}
+
+.back-to-list-btn {
+  background: #324a5c;
+  color: white;
+  border: 0;
+  border-width: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9em;
+  padding: 10px 20px;
+}

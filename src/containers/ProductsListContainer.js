@@ -29,10 +29,6 @@ class ProductsListContainer extends React.Component{
     });
   }
 
-  onClickDeleteProduct = (productIndex) => {
-    this.props.deleteProduct(productIndex);
-  }
-
   totalAmount(){
     var totalAmount = this.state.products.reduce((s, p) => s + p.amount(), 0)
     return totalAmount;
@@ -40,7 +36,7 @@ class ProductsListContainer extends React.Component{
 
   render(){
     return (
-      <div className={"products-list col-6"+(this.props.showComponent ? '' : ' hidden')}>
+      <div className={"products-list component-container col-6"+(this.props.showComponent ? '' : ' hidden')}>
         <div className='container-title'>Product list</div>
         <div className="products-container">
           {this.state.products.map((product,index) =>
@@ -70,7 +66,7 @@ class ProductsListContainer extends React.Component{
                   </button>
                 </div>
                 <div className="products-item-amount-container">
-                  Total
+                  Total:
                   <span className="products-item-amount">
                     {product.amount()}
                   </span>
@@ -84,7 +80,7 @@ class ProductsListContainer extends React.Component{
                     src={require("../images/icon-delete.png")}
                     draggable="false"
                     alt="Delete product"
-                    onClick={() => {this.onClickDeleteProduct(index);}}
+                    onClick={() => {this.props.deleteProduct(index);}}
                   />
                 </div>
                 <div className="product-item-controll-btn-container">
@@ -93,6 +89,7 @@ class ProductsListContainer extends React.Component{
                     src={require("../images/icon-details.png")}
                     draggable="false"
                     alt="Show details"
+                    onClick={() => {this.props.showProductDetails(index);}}
                   />
                 </div>
               </div>
@@ -100,7 +97,7 @@ class ProductsListContainer extends React.Component{
           )}
         </div>
         <div className='total-amount-container'>
-          Total
+          Total:
           <span className='total-amount'>{this.totalAmount()}</span>
           $
         </div>

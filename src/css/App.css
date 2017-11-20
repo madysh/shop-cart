@@ -17,11 +17,11 @@
   color: white;
 }
 
-.new-product-container, .products-list {
+.component-container {
   text-align: center;
 }
 
-.products .container-title {
+.component-container .container-title {
   font-weight: bold;
   margin: 10px;
 }

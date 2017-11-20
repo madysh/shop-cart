@@ -1,7 +1,4 @@
-.new-product-container {
-  text-align: center;
-}
-.new-product-container input {
+.new-product-container input, .new-product-container input:focus {
   background: #324a5c;
   color: white;
   margin: 10px;

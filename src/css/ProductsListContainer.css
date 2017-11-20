@@ -14,6 +14,10 @@
   margin: 5px;
 }
 
+.products-item:hover {
+  background: #151a21;
+}
+
 .products-item-image {
   float: left;
   padding: 30px;
@@ -81,6 +85,7 @@
 .product-item-controll-btn-container {
   display: inline-block;
   padding: 5px;
+  background: #202d3c;
 }
 
 .product-item-controll-btn-container img{

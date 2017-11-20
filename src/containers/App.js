@@ -1,8 +1,9 @@
 import React from 'react'
 import NewProductContainer from './NewProductContainer'
 import ProductsListContainer from './ProductsListContainer'
-import logo from '../images/logo.jpg'
+import ProductDetailsContainer from './ProductDetailsContainer'
 import Product from '../models/Product'
+import logo from '../images/logo.jpg'
 import '../css/App.css';
 
 class App extends React.Component{
@@ -13,7 +14,8 @@ class App extends React.Component{
         new Product({name: 'Buy apples', imageName: 'apple', price: '1'}),
         new Product({name: 'fish sticks', imageName: 'fish', price: '7'})
       ],
-      showProductsList: true
+      showProductsList: true,
+      currentProduct: new Product()
     };
   }
 
@@ -41,6 +43,17 @@ class App extends React.Component{
     });
   }
 
+  showProductsList =() => {
+    this.setState({showProductsList: true});
+  }
+
+  showProductDetails =(index) => {
+    this.setState({
+      showProductsList: false,
+      currentProduct: this.state.products[index]
+    });
+  }
+
   render(){
     return(
       <div>
@@ -55,7 +68,13 @@ class App extends React.Component{
             products={this.state.products}
             updateProduct={this.updateProduct}
             deleteProduct={this.deleteProduct}
+            showProductDetails={this.showProductDetails}
             showComponent={this.state.showProductsList}
+          />
+          <ProductDetailsContainer
+            product={this.state.currentProduct}
+            showProductsList={this.showProductsList}
+            showComponent={!this.state.showProductsList}
           />
         </div>
       </div>
