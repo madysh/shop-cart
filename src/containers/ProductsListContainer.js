@@ -40,7 +40,7 @@ class ProductsListContainer extends React.Component{
 
   render(){
     return (
-      <div className="products-list col-6">
+      <div className={"products-list col-6"+(this.props.showComponent ? '' : ' hidden')}>
         <div className='container-title'>Product list</div>
         <div className="products-container">
           {this.state.products.map((product,index) =>

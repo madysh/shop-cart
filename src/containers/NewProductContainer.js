@@ -90,7 +90,7 @@ class NewProductContainer extends React.Component{
     return (
       <div className="new-product-container col-6">
         <div className='container-title'>Add product to your cart list</div>
-        <form className="new-product-form">
+        <div className="new-product-form">
           <input
             type="text"
             name="name"
@@ -162,7 +162,7 @@ class NewProductContainer extends React.Component{
           >
             Add to list
           </button>
-        </form>
+        </div>
       </div>
     );
   }

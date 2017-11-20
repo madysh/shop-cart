@@ -12,11 +12,12 @@ class App extends React.Component{
       products: [
         new Product({name: 'Buy apples', imageName: 'apple', price: '1'}),
         new Product({name: 'fish sticks', imageName: 'fish', price: '7'})
-      ]
+      ],
+      showProductsList: true
     };
   }
 
-  addNewProduct(product){
+  addNewProduct = (product) => {
     this.setState((prevState, props) => {
       var products = prevState.products;
       products.push(product);
@@ -24,7 +25,7 @@ class App extends React.Component{
     });
   }
 
-  updateProduct(product, index){
+  updateProduct = (product, index) => {
     this.setState((prevState, props) => {
       var products = prevState.products;
       products[index] = product;
@@ -32,7 +33,7 @@ class App extends React.Component{
     });
   }
 
-  deleteProduct(index){
+  deleteProduct = (index) => {
     this.setState((prevState, props) => {
       var products = prevState.products;
       products.splice(index, 1);
@@ -48,12 +49,13 @@ class App extends React.Component{
         </div>
         <div className="products row">
           <NewProductContainer
-            addNewProduct = {this.addNewProduct.bind(this)}
+            addNewProduct={this.addNewProduct}
           />
           <ProductsListContainer
             products={this.state.products}
-            updateProduct={this.updateProduct.bind(this)}
-            deleteProduct={this.deleteProduct.bind(this)}
+            updateProduct={this.updateProduct}
+            deleteProduct={this.deleteProduct}
+            showComponent={this.state.showProductsList}
           />
         </div>
       </div>
@@ -62,4 +64,3 @@ class App extends React.Component{
 }
 
 export default App
-
