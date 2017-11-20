@@ -1,9 +1,9 @@
 import React from 'react';
-import Product from '../models/Product'
-import Inputs from './NewProduct/Inputs'
-import CountContainer from './NewProduct/CountContainer'
-import ImageContainer from './NewProduct/ImageContainer'
-import SubmitButton from './NewProduct/SubmitButton'
+import Product from '../models/Product';
+import Inputs from './NewProduct/Inputs';
+import CountContainer from './Common/CountContainer';
+import ImageContainer from './NewProduct/ImageContainer';
+import SubmitButton from './NewProduct/SubmitButton';
 import '../css/NewProductContainer.css';
 
 class NewProductContainer extends React.Component{
@@ -13,18 +13,18 @@ class NewProductContainer extends React.Component{
       product: new Product(),
       submitButtonIsActive: false
     };
-  }
+  };
 
   updateProduct =(attr, value) => {
     this.setState((prevState, props) => {
-      var product = prevState.product
-      product[attr] = value
+      var product = prevState.product;
+      product[attr] = value;
       return {
         product: product,
         submitButtonIsActive: product.isValid()
       };
     });
-  }
+  };
 
   submitForm = () => {
     this.props.addNewProduct(this.state.product);
@@ -32,7 +32,7 @@ class NewProductContainer extends React.Component{
       product: new Product(),
       submitButtonIsActive: false
     });
-  }
+  };
 
   render(){
     var product = this.state.product;
@@ -40,7 +40,7 @@ class NewProductContainer extends React.Component{
     return (
       <div className="new-product-container component-container col-6">
         <div className='container-title'>Add product to your cart list</div>
-        <div className="new-product-form">
+        <div className="new-product">
           <Inputs
             product={product}
             updateProduct={this.updateProduct}
@@ -60,7 +60,7 @@ class NewProductContainer extends React.Component{
         </div>
       </div>
     );
-  }
+  };
 }
 
 export default NewProductContainer;

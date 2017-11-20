@@ -4,7 +4,7 @@
   margin: 10px;
 }
 
-.new-product-form button {
+.new-product button {
   cursor: pointer;
 }
 
@@ -12,22 +12,22 @@
   cursor: not-allowed;
 }
 
-.new-product-count, .new-product-count-container .btn {
+.new-product .product-count, .new-product .product-count-container .product-count-btn {
   width: 35px;
   float: left;
   text-align: center;
 }
 
-.new-product-count {
+.new-product .product-count {
   margin-top: 10px;
 }
 
-.new-product-count-container .btn {
+.new-product .product-count-container .btn {
   background: #324a5c;
   color: white;
 }
 
-.new-product-count-container {
+.new-product .product-count-container {
   margin: 0 auto;
   display: table;
 }

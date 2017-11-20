@@ -1,4 +1,6 @@
 import React from 'react';
+import BackButton from './ProductDetails/BackButton';
+import ProductImage from './Common/ProductImage';
 import '../css/ProductDetailsContainer.css';
 
 class ProductDetailsContainer extends React.Component{
@@ -8,14 +10,7 @@ class ProductDetailsContainer extends React.Component{
     return (
       <div className={"product-details-container component-container col-6"+(this.props.showComponent ? '' : ' hidden')}>
         <div className="product-name container-title">{product.name}</div>
-        <div className="product-image-container">
-          <img
-            src={product.imageSrc()}
-            className="product-image"
-            alt={product.name}
-            draggable="false"
-          />
-        </div>
+        <ProductImage product={product} />
         <div className="product-attribute">
           Count:
           <span className="product-attribute-value">{product.count}</span>
@@ -30,15 +25,10 @@ class ProductDetailsContainer extends React.Component{
           <span className="product-attribute-value">{product.amount()}</span>
           $
         </div>
-        <button
-          className="back-to-list-btn"
-          onClick={this.props.showProductsList}
-        >
-          Back to list
-        </button>
+        <BackButton showProductsList={this.props.showProductsList} />
       </div>
-    )
-  }
+    );
+  };
 }
 
 export default ProductDetailsContainer

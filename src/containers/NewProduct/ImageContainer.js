@@ -44,11 +44,11 @@ class ImageContainer extends React.Component{
                 draggable="false"
               />
             </div>
-          )}
+          )};
         </div>
       </div>
     );
-  }
+  };
 }
 
 export default ImageContainer;

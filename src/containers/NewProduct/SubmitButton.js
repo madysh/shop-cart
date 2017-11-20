@@ -11,7 +11,7 @@ class SubmitButton extends React.Component{
         Add to list
       </button>
     );
-  }
+  };
 }
 
 export default SubmitButton;
