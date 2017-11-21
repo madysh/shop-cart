@@ -3,10 +3,11 @@ export const addProduct = (product) => ({
   product: product
 });
 
-export const updateProduct = (index, product) => ({
+export const updateProduct = (index, attr, value) => ({
   type: 'UPDATE_PRODUCT',
   index: index,
-  product: product
+  attr: attr,
+  value: value
 });
 
 export const deleteProduct = (index) => ({
@@ -30,4 +31,13 @@ export const toggleImagesList = () => ({
 
 export const hideImagesList = () => ({
   type: 'HIDE_IMAGES_LIST'
+});
+
+export const showProductDetails = (product) => ({
+  type: 'SHOW_PRODUCT_DETAILS',
+  product: product
+});
+
+export const hideProductDetails = () => ({
+  type: 'HIDE_PRODUCT_DETAILS'
 });

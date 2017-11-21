@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CountContainer  = ({ product, index, updateProduct}) => {
+const CountContainer  = ({ product, index, updateProduct }) => {
   var onClickCountButton = (action, product, index, e) => {
     var value = product.count;
     var attr = 'count';
@@ -14,10 +14,10 @@ const CountContainer  = ({ product, index, updateProduct}) => {
       value++;
     };
 
-    if (index!== undefined){
-      updateProduct(index, attr, value);
-    } else {
+    if (index === undefined){
       updateProduct(attr, value);
+    } else {
+      updateProduct(index, attr, value);
     };
   };
 

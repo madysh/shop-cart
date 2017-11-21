@@ -17,7 +17,7 @@ const products = (state, action) => {
       products.splice(action.index, 1);
       return products;
     case 'UPDATE_PRODUCT':
-      products[action.index] = action.product;
+      products[action.index][action.attr] = action.value;
       return products;
     default:
       return products;

@@ -1,44 +1,45 @@
 import React from 'react';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { addProduct, updateProduct, deleteProduct, showProductDetails, hideProductDetails } from '../actions'
 import Item from './ProductsList/Item';
 import TotalAmount from './ProductsList/TotalAmount';
 import '../css/ProductsListContainer.css';
 
-class ProductsListContainer extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      products: this.props.products
-    };
-  };
+const ProductsListContainer = ({ products, isVisible, addProduct, updateProduct, deleteProduct, showProductDetails, hideProductDetails }) => (
+  <div className={"products-list component-container col-6"+(isVisible ? '' :' hidden')}>
+    <div className='container-title'>Product list</div>
+    <div className="products-container">
+      {products.map((product,index) =>
+        <Item
+          product={product}
+          index={index}
+          key={index}
+          updateProduct={updateProduct}
+          deleteProduct={deleteProduct}
+          showProductDetails={showProductDetails}
+          hideProductDetails={hideProductDetails}
+        />
+      )}
+    </div>
+    <TotalAmount products={products} />
+  </div>
+)
 
-  updateProduct =(productIndex, attr, value) => {
-    this.setState((prevState, props) => {
-      var products = prevState.products;
-      products[productIndex][attr] = value;
-      return {products: products};
-    });
-  };
-
-  render(){
-    return (
-      <div className={"products-list component-container col-6"+(this.props.showComponent ? '' : ' hidden')}>
-        <div className='container-title'>Product list</div>
-        <div className="products-container">
-          {this.state.products.map((product,index) =>
-            <Item
-              product={product}
-              index={index}
-              key={index}
-              updateProduct={this.updateProduct}
-              deleteProduct={this.props.deleteProduct}
-              showProductDetails={this.props.showProductDetails}
-            />
-          )}
-        </div>
-        <TotalAmount products={this.state.products} />
-      </div>
-    );
-  };
+ProductsListContainer.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired
+  })).isRequired
 }
 
-export default ProductsListContainer
+const mapStateToProps = (state) => ({
+  products: state.productsList,
+  isVisible: !state.productDetails.isVisible
+});
+
+export default connect(
+  mapStateToProps,
+  { addProduct, updateProduct, deleteProduct, showProductDetails, hideProductDetails }
+)(ProductsListContainer)

@@ -1,9 +1,10 @@
 import React from 'react';
 
-const SubmitButton  = ({ product, isActive, addProduct, resetForm }) => {
+const SubmitButton  = ({ product, isActive, addProduct, resetForm, hideProductDetails }) => {
   var submitForm = () => {
     addProduct(product);
     resetForm();
+    hideProductDetails();
   };
 
   return (

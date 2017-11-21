@@ -1,34 +1,38 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { hideProductDetails } from '../actions'
 import BackButton from './ProductDetails/BackButton';
 import ProductImage from './Common/ProductImage';
 import '../css/ProductDetailsContainer.css';
 
-class ProductDetailsContainer extends React.Component{
-  render(){
-    var product = this.props.product;
+const ProductDetailsContainer = ({ product, isVisible, hideProductDetails }) => (
+  <div className={"product-details-container component-container col-6"+(isVisible ? '' : ' hidden')}>
+    <div className="product-name container-title">{product.name}</div>
+    <ProductImage product={product} />
+    <div className="product-attribute">
+      Count:
+      <span className="product-attribute-value">{product.count}</span>
+    </div>
+    <div className="product-attribute">
+      Price:
+      <span className="product-attribute-value">{product.price}</span>
+      $
+    </div>
+    <div className="product-attribute">
+      Total:
+      <span className="product-attribute-value">{product.amount()}</span>
+      $
+    </div>
+    <BackButton hideProductDetails={hideProductDetails} />
+  </div>
+);
 
-    return (
-      <div className={"product-details-container component-container col-6"+(this.props.showComponent ? '' : ' hidden')}>
-        <div className="product-name container-title">{product.name}</div>
-        <ProductImage product={product} />
-        <div className="product-attribute">
-          Count:
-          <span className="product-attribute-value">{product.count}</span>
-        </div>
-        <div className="product-attribute">
-          Price:
-          <span className="product-attribute-value">{product.price}</span>
-          $
-        </div>
-        <div className="product-attribute">
-          Total:
-          <span className="product-attribute-value">{product.amount()}</span>
-          $
-        </div>
-        <BackButton showProductsList={this.props.showProductsList} />
-      </div>
-    );
-  };
-}
+const mapStateToProps = (state) => ({
+  product: state.productDetails.product,
+  isVisible: state.productDetails.isVisible
+});
 
-export default ProductDetailsContainer
+export default connect(
+  mapStateToProps,
+  { hideProductDetails }
+)(ProductDetailsContainer)
