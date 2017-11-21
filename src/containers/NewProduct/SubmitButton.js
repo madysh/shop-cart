@@ -1,16 +1,16 @@
 import React from 'react';
 
-const SubmitButton  = ({ product, isActive, addProduct, resetForm, hideProductDetails }) => {
+const SubmitButton  = (args) => {
   var submitForm = () => {
-    addProduct(product);
-    resetForm();
-    hideProductDetails();
+    args.addProduct(args.product);
+    args.resetForm();
+    args.hideProductDetails();
   };
 
   return (
     <button
-      className={"new-product-submit-button btn " + (isActive ? '' : 'disabled')}
-      disabled={!isActive}
+      className={"new-product-submit-button btn " + (args.isActive ? '' : 'disabled')}
+      disabled={!args.isActive}
       onClick={submitForm}
     >
       Add to list

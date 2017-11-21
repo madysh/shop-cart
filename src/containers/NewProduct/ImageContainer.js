@@ -1,23 +1,23 @@
 import React from 'react';
 
-const ImageContainer  = ({ product, imagesListIsVisible, updateProduct, toggleImagesList, hideImagesList }) => {
+const ImageContainer  = (args) => {
   var onClickImagesListItem = (imageName) => {
-    updateProduct('imageName', imageName);
-    hideImagesList();
+    args.updateProduct('imageName', imageName);
+    args.hideImagesList();
   }
-  const availableImageNames = product.availableImageNames();
+  const availableImageNames = args.product.availableImageNames();
 
   return (
     <div className="new-product-image-container">
       <img
-        src={product.imageSrc()}
+        src={args.product.imageSrc()}
         className="new-product-image"
-        onClick={toggleImagesList}
+        onClick={args.toggleImagesList}
         alt="New Product"
         draggable="false"
       />
       <div
-        className={"new-product-images-list " + (imagesListIsVisible ? '' : "hidden")}>
+        className={"new-product-images-list " + (args.imagesListIsVisible ? '' : "hidden")}>
         {availableImageNames.map(name =>
           <div
             className="new-product-image-item-container"
@@ -28,7 +28,7 @@ const ImageContainer  = ({ product, imagesListIsVisible, updateProduct, toggleIm
               alt={name}
               data-name={name}
               className="new-product-image-item"
-              src={product.imageSrc(name)}
+              src={args.product.imageSrc(name)}
               draggable="false"
             />
           </div>

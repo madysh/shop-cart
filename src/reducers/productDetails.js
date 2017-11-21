@@ -9,7 +9,7 @@ const productDetails = (state = initialState, action) => {
   switch (action.type) {
     case 'SHOW_PRODUCT_DETAILS':
       return {
-        product: state.product,
+        product: action.product,
         isVisible: true
       };
     case 'HIDE_PRODUCT_DETAILS':

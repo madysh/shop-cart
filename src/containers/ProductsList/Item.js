@@ -4,24 +4,26 @@ import CountContainer from '../Common/CountContainer';
 import ControllButtons from './ControllButtons';
 import ProductAmount from './ProductAmount';
 
-const Item  = ({ product, index, updateProduct, deleteProduct, showProductDetails, hideProductDetails }) => (
-  <div className="products-item" key={index}>
-    <ProductImage product={product} />
+const Item = (args) => (
+  <div className="products-item" key={args.index}>
+    <ProductImage product={args.product} />
     <div className="products-item-details">
-      <div className="products-item-name">{product.name}</div>
+      <div className="products-item-name">{args.product.name}</div>
       <CountContainer
-        product={product}
-        index={index}
-        updateProduct={updateProduct}
+        product={args.product}
+        index={args.index}
+        updateProduct={args.updateProduct}
       />
-      <ProductAmount product={product} />
+      <ProductAmount product={args.product} />
     </div>
     <ControllButtons
-      index={index}
-      deleteProduct={deleteProduct}
-      showProductDetails={showProductDetails}
-      hideProductDetails={hideProductDetails}
+      index={args.index}
+      product={args.product}
+      deleteProduct={args.deleteProduct}
+      showProductDetails={args.showProductDetails}
+      hideProductDetails={args.hideProductDetails}
     />
   </div>
 )
+
 export default Item

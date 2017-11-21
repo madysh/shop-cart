@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BackButton = ({hideProductDetails}) =>(
+const BackButton = ({ hideProductDetails }) =>(
   <button
     className="back-to-list-btn"
     onClick={hideProductDetails}

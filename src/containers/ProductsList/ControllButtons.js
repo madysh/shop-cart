@@ -2,7 +2,7 @@ import React from 'react';
 import IconDelete from "../../images/icon-delete.png";
 import IconDetails from "../../images/icon-details.png";
 
-const ControllButtons  = ({ product, index, deleteProduct, showProductDetails }) => (
+const ControllButtons  = (args) => (
   <div className="product-item-controll-buttons">
     <div className="product-item-controll-btn-container">
       <img
@@ -10,7 +10,7 @@ const ControllButtons  = ({ product, index, deleteProduct, showProductDetails })
         src={IconDelete}
         draggable="false"
         alt="Delete product"
-        onClick={() => {deleteProduct(index);}}
+        onClick={() => {args.deleteProduct(args.index);}}
       />
     </div>
     <div className="product-item-controll-btn-container">
@@ -19,7 +19,7 @@ const ControllButtons  = ({ product, index, deleteProduct, showProductDetails })
         src={IconDetails}
         draggable="false"
         alt="Show details"
-        onClick={() => {showProductDetails(product);}}
+        onClick={() => {args.showProductDetails(args.product);}}
       />
     </div>
   </div>
