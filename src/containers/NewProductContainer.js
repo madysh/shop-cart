@@ -1,66 +1,56 @@
 import React from 'react';
-import Product from '../models/Product';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { resetForm, updateProductInForm, addProduct, toggleImagesList, hideImagesList } from '../actions'
+
 import Inputs from './NewProduct/Inputs';
 import CountContainer from './Common/CountContainer';
 import ImageContainer from './NewProduct/ImageContainer';
 import SubmitButton from './NewProduct/SubmitButton';
+
 import '../css/NewProductContainer.css';
 
-class NewProductContainer extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      product: new Product(),
-      submitButtonIsActive: false
-    };
-  };
-
-  updateProduct =(attr, value) => {
-    this.setState((prevState, props) => {
-      var product = prevState.product;
-      product[attr] = value;
-      return {
-        product: product,
-        submitButtonIsActive: product.isValid()
-      };
-    });
-  };
-
-  submitForm = () => {
-    this.props.addNewProduct(this.state.product);
-    this.setState({
-      product: new Product(),
-      submitButtonIsActive: false
-    });
-  };
-
-  render(){
-    var product = this.state.product;
-
-    return (
-      <div className="new-product-container component-container col-6">
-        <div className='container-title'>Add product to your cart list</div>
-        <div className="new-product">
-          <Inputs
-            product={product}
-            updateProduct={this.updateProduct}
-          />
-          <CountContainer
-            product={product}
-            updateProduct={this.updateProduct}
-          />
-          <ImageContainer
-            product={product}
-            updateProduct={this.updateProduct}
-          />
-          <SubmitButton
-            submitButtonIsActive={this.state.submitButtonIsActive}
-            submitForm={this.submitForm}
-          />
-        </div>
-      </div>
-    );
-  };
+const NewProductContainer = ({ product, submitButtonIsActive, imagesListIsVisible, resetForm, updateProductInForm, addProduct, toggleImagesList, hideImagesList }) => (
+  <div className="new-product-container component-container col-6">
+    <div className='container-title'>Add product to your cart list</div>
+    <div className="new-product">
+      <Inputs
+        product={product}
+        updateProduct={updateProductInForm}
+      />
+      <CountContainer
+        product={product}
+        updateProduct={updateProductInForm}
+      />
+      <ImageContainer
+        product={product}
+        updateProduct={updateProductInForm}
+        toggleImagesList={toggleImagesList}
+        hideImagesList={hideImagesList}
+        imagesListIsVisible={imagesListIsVisible}
+      />
+      <SubmitButton
+        product={product}
+        imagesListIsVisible={imagesListIsVisible}
+        addProduct={addProduct}
+        resetForm={resetForm}
+        isActive={submitButtonIsActive}
+      />
+    </div>
+  </div>
+)
+NewProductContainer.propTypes = {
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired
+  }).isRequired,
+  submitButtonIsActive: PropTypes.bool
 }
 
-export default NewProductContainer;
+const mapStateToProps = (state) => (state.form)
+
+export default connect(
+  mapStateToProps,
+  { resetForm, updateProductInForm, addProduct, toggleImagesList, hideImagesList }
+)(NewProductContainer)

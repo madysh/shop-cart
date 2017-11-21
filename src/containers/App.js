@@ -1,33 +1,18 @@
 import React from 'react';
-import NewProductContainer from './NewProductContainer';
-import ProductsListContainer from './ProductsListContainer';
-import ProductDetailsContainer from './ProductDetailsContainer';
-import Product from '../models/Product';
+//import ProductsListContainer from './ProductsListContainer';
+//import ProductDetailsContainer from './ProductDetailsContainer';
 import Header from './App/Header';
+import NewProductContainer from './NewProductContainer';
 import '../css/App.css';
 
-class App extends React.Component{
+const App = () => (
+/*
   constructor(){
     super();
     this.state = {
-      products: [
-        new Product({name: 'Buy apples', imageName: 'apple', price: '1'}),
-        new Product({name: 'fish sticks', imageName: 'fish', price: '7'})
-      ],
       showProductsList: true,
       currentProduct: new Product()
     };
-  };
-
-  addNewProduct = (product) => {
-    this.setState((prevState, props) => {
-      var products = prevState.products;
-      products.push(product);
-      return {
-        products: products,
-        showProductsList: true
-      };
-    });
   };
 
   updateProduct = (product, index) => {
@@ -55,16 +40,18 @@ class App extends React.Component{
       showProductsList: false,
       currentProduct: this.state.products[index]
     });
-  };
+  };*/
 
-  render(){
-    return(
-      <div>
-        <Header />
-        <div className="products row">
-          <NewProductContainer
-            addNewProduct={this.addNewProduct}
-          />
+  <div>
+    <Header />
+    <div className="products row">
+      <NewProductContainer />
+    </div>
+  </div>
+)
+
+export default App
+          /*
           <ProductsListContainer
             products={this.state.products}
             updateProduct={this.updateProduct}
@@ -77,10 +64,4 @@ class App extends React.Component{
             showProductsList={this.showProductsList}
             showComponent={!this.state.showProductsList}
           />
-        </div>
-      </div>
-    );
-  };
-}
-
-export default App
+          */

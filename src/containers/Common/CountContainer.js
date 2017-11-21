@@ -1,7 +1,7 @@
 import React from 'react';
 
-class CountContainer extends React.Component{
-  onClickCountButton = (action, product, productIndex, e) => {
+const CountContainer  = ({ product, index, updateProduct}) => {
+  var onClickCountButton = (action, product, index, e) => {
     var value = product.count;
     var attr = 'count';
 
@@ -14,34 +14,30 @@ class CountContainer extends React.Component{
       value++;
     };
 
-    if (productIndex!== undefined){
-      this.props.updateProduct(productIndex, attr, value);
+    if (index!== undefined){
+      updateProduct(index, attr, value);
     } else {
-      this.props.updateProduct(attr, value);
+      updateProduct(attr, value);
     };
   };
 
-  render(){
-    var product = this.props.product;
-
-    return (
-      <div className="product-count-container">
-        <button
-          className="btn product-count-btn product-count-btn-minus"
-          onClick={(e) => {this.onClickCountButton('minus', product, this.props.index, e);}}
-        >
-          -
-        </button>
-        <div className="product-count">{product.count}</div>
-        <button
-          className="btn product-count-btn product-count-btn-plus"
-          onClick={(e) => {this.onClickCountButton('plus', product, this.props.index, e);}}
-        >
-          +
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className="product-count-container">
+      <button
+        className="btn product-count-btn product-count-btn-minus"
+        onClick={(e) => {onClickCountButton('minus', product, index, e);}}
+      >
+        -
+      </button>
+      <div className="product-count">{product.count}</div>
+      <button
+        className="btn product-count-btn product-count-btn-plus"
+        onClick={(e) => {onClickCountButton('plus', product, index, e);}}
+      >
+        +
+      </button>
+    </div>
+  );
 }
 
 export default CountContainer;

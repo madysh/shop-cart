@@ -1,7 +1,7 @@
 import React from 'react';
 
-class Inputs extends React.Component{
-  onChange(inputName){
+const Inputs  = ({ product, updateProduct }) => {
+  var onChange = (inputName) => {
     var value = '';
     switch(inputName) {
     case 'name':
@@ -14,36 +14,32 @@ class Inputs extends React.Component{
       return;
     };
 
-    this.props.updateProduct(inputName, value);
+    updateProduct(inputName, value);
   }
 
-  render(){
-    var product = this.props.product;
-
-    return (
-      <div className="new-product-imputs">
-        <input
-          type="text"
-          name="name"
-          onChange={() => {this.onChange('name');}}
-          className="new-product-name form-control"
-          placeholder="Product name"
-          value={product.name}
-          ref={(input) => { this.productNameInput = input; }}
-        />
-        <input
-          type="number"
-          min="1"
-          name='price'
-          onChange={() => {this.onChange('price');}}
-          className="new-product-price form-control"
-          placeholder="Product price"
-          value={product.price}
-          ref={(input) => { this.productPriceInput = input; }}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="new-product-imputs">
+      <input
+        type="text"
+        name="name"
+        onChange={() => {onChange('name');}}
+        className="new-product-name form-control"
+        placeholder="Product name"
+        value={product.name}
+        ref={(input) => { this.productNameInput = input; }}
+      />
+      <input
+        type="number"
+        min="1"
+        name='price'
+        onChange={() => {onChange('price');}}
+        className="new-product-price form-control"
+        placeholder="Product price"
+        value={product.price}
+        ref={(input) => { this.productPriceInput = input; }}
+      />
+    </div>
+  );
 }
 
 export default Inputs;
