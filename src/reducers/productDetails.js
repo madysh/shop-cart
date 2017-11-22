@@ -1,4 +1,5 @@
 import Product from '../models/Product';
+import * as types from '../constants/ActionTypes'
 
 const initialState = {
   product: new Product(),
@@ -7,12 +8,12 @@ const initialState = {
 
 const productDetails = (state = initialState, action) => {
   switch (action.type) {
-    case 'SHOW_PRODUCT_DETAILS':
+    case types.SHOW_PRODUCT_DETAILS:
       return {
         product: action.product,
         isVisible: true
       };
-    case 'HIDE_PRODUCT_DETAILS':
+    case types.HIDE_PRODUCT_DETAILS:
       return initialState
     default:
       return state;

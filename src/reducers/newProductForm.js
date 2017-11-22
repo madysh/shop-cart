@@ -1,4 +1,5 @@
 import Product from '../models/Product';
+import * as types from '../constants/ActionTypes'
 
 const initialState = {
   product: new Product(),
@@ -8,19 +9,19 @@ const initialState = {
 
 const newProductForm = (state = initialState, action) => {
   switch (action.type) {
-    case 'UPDATE_PRODUCT_IN_THE_FORM':
+    case types.UPDATE_PRODUCT_IN_THE_FORM:
       let product = new Product(state.product);
       product[action.attr] = action.value
       return {
         product: product,
         submitButtonIsActive: product.isValid()
       };
-    case 'RESET_FORM':
-      return initialState
-    case 'TOGGLE_IMAGES_LIST':
-      return { ...state, imagesListIsVisible: !state.imagesListIsVisible }
-    case 'HIDE_IMAGES_LIST':
-      return { ...state, imagesListIsVisible: false }
+    case types.RESET_FORM:
+      return initialState;
+    case types.TOGGLE_IMAGES_LIST:
+      return { ...state, imagesListIsVisible: !state.imagesListIsVisible };
+    case types.HIDE_IMAGES_LIST:
+      return { ...state, imagesListIsVisible: initialState.imagesListIsVisible };
     default:
       return state;
   }
