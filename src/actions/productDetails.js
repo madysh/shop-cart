@@ -1,8 +1,10 @@
+import * as types from '../constants/ActionTypes'
+
 export const showProductDetails = (product) => ({
-  type: 'SHOW_PRODUCT_DETAILS',
+  type: types.SHOW_PRODUCT_DETAILS,
   product: product
 });
 
 export const hideProductDetails = () => ({
-  type: 'HIDE_PRODUCT_DETAILS'
+  type: types.HIDE_PRODUCT_DETAILS
 });
