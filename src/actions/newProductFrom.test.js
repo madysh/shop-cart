@@ -3,9 +3,9 @@ import * as types from '../constants/ActionTypes'
 
 describe('updateProductInForm', () => {
   it('should create an action to update a product in the form', () => {
-    const attr = 'count'
-    const value = 10
-    const expectedAction = {
+    var attr = 'count'
+    var value = 10
+    var expectedAction = {
       type:types.UPDATE_PRODUCT_IN_THE_FORM,
       attr: attr,
       value: value
@@ -17,7 +17,7 @@ describe('updateProductInForm', () => {
 
 describe('toggleImagesList', () => {
   it('should toggle the list of images in the form', () => {
-    const expectedAction = {
+    var expectedAction = {
       type: types.TOGGLE_IMAGES_LIST
     }
 
@@ -27,7 +27,7 @@ describe('toggleImagesList', () => {
 
 describe('hideImagesList', () => {
   it('should hide the list of images in the form', () => {
-    const expectedAction = {
+    var expectedAction = {
       type: types.HIDE_IMAGES_LIST
     }
 
@@ -37,7 +37,7 @@ describe('hideImagesList', () => {
 
 describe('resetForm', () => {
   it('should reset the state of the form', () => {
-    const expectedAction = {
+    var expectedAction = {
       type: types.RESET_FORM
     }
 

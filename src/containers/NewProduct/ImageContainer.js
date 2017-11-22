@@ -32,7 +32,7 @@ const ImageContainer  = (args) => {
               draggable="false"
             />
           </div>
-        )};
+        )}
       </div>
     </div>
   );

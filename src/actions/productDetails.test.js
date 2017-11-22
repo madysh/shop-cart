@@ -4,8 +4,8 @@ import * as types from '../constants/ActionTypes'
 
 describe('showProductDetails', () => {
   it('should the details page for the passed product', () => {
-    const product = new Product();
-    const expectedAction = {
+    var product = new Product();
+    var expectedAction = {
       type:types.SHOW_PRODUCT_DETAILS,
       product: product
     }
@@ -16,7 +16,7 @@ describe('showProductDetails', () => {
 
 describe('hideProductDetails', () => {
   it('should hide the details page', () => {
-    const expectedAction = {
+    var expectedAction = {
       type: types.HIDE_PRODUCT_DETAILS
     }
 
