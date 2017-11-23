@@ -13,6 +13,12 @@ const defaultState = {
   imagesListIsVisible: true
 }
 
+describe('initial state', () => {
+  it('sets an expected state', () => {
+    expect(newProductForm(undefined, {})).toEqual(initialState);
+  })
+});
+
 describe(types.UPDATE_PRODUCT_IN_THE_FORM, () => {
   it('updates the passed attribute in the state', () => {
     var state = defaultState;
