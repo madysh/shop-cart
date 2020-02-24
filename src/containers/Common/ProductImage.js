@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductImage  = ({ product }) => (
+const ProductImage = ({ product }) => (
   <div className="product-image-container">
     <img
       src={product.imageSrc()}
@@ -11,4 +11,4 @@ const ProductImage  = ({ product }) => (
   </div>
 )
 
-export default ProductImage
+export default ProductImage;
